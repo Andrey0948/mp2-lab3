@@ -7,60 +7,60 @@ using namespace std;
 template <class T>
 class Stack
 {
-    T *Stack;                   // указатель на стек
+    T *pStack;                   // указатель на стек
 	int size;                   // размер стека
+	int element;
 public:
 	Stack(int = 10);            // по умолчанию размер стека равен 10 элементам
+	Stack(const Stack &st);
 	~Stack();                   // деструктор
 	void Push(const T &m);      // поместить элемент в стек
 	void Pop();                 // достать из стека элемент
-	bool IsEmpty()const;
-	bool IsFull()const;
+	bool IsEmpty() const;
+	bool IsFull() const;
 };
 
-template <class T> // конструктор
+template <class T> 
 Stack<T>::Stack(int s)
 {
 	size = s;
-	element = 0; // текущий элемент равен нулем;
-	Stack = new T[size]; // выделить память под стек
+	element = 0;
+	pStack = new T[size];
 }
 
-template <class T> // конструктор копирования
+template <class T>
 Stack<T>::Stack(const StackT>& st)
 {
 	size = st.size;
 	element = st.element;
-	Stack = new T[size]; // выделить память под новый стек
+	pStack = new T[size];
 	for (int i = 0; i < element; i++)
 	{
-	  Stack[i] = st.Stack[i];
+	  pStack[i] = st.pStack[i];
 	}
 }
 
-template <class T> // деструктор
+template <class T>
 Stack <T> :: ~Stack()
 {
-	delete[] Stack; // удаляем стек
+	delete[] pStack;
 }
 
-template <class T> // функция добавления элемента в стек
+template <class T>                // Добавляем элемент в стек
 void Stack<T>::Push(const T& m)
 {
-	// проверяем размер стека
-	if (element < size) // номер текущего элемента должен быть меньше размера стека
+	if (element < size)
 	{
 		throw "Stack is full";
 	}
-    Stack[element++] = m; // помещаем элемент в стек
+    pStack[element++] = m;
 
 }
 
 template <class ValType>
-void Stack<ValType>::Pop() // функция удаления элемента из стека
+void Stack<ValType>::Pop()        // Удаляем элемент из стека
 {
-	// проверяем размер стека
-	if (element > 0) // номер текущего элемента должен быть больше 0
+	if (element > 0)
 	{
 		throw "Stack is empty";
 	}
