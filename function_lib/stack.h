@@ -1,81 +1,111 @@
 #pragma once
 #include <iostream>
-#include <string>
 
 using namespace std;
+
+const int MaxStackSize = 100;
 
 template <class T>
 class Stack
 {
-    T *pStack;                   // указатель на стек
-	int size;                   // размер стека
-	int element;
+	T* pStack;                      // указатель на стэк
+	int size;                             // размер
+	int element;                          // вершина стека
 public:
-	Stack(int = 10);            // по умолчанию размер стека равен 10 элементам
-	Stack(const Stack &st);
-	~Stack();                   // деструктор
-	void Push(const T &m);      // поместить элемент в стек
-	void Pop();                 // достать из стека элемент
-	bool IsEmpty() const;
-	bool IsFull() const;
+	Stack(int s = 10);                    // конструктор
+	Stack(const Stack& st);               // конструктор копирования
+	~Stack();                             // деструктор
+	void Push(T e);                 // добовление элемента в стек
+	T Pop();                        // получение верхнего элемента с удалением из стека
+	T Top();                        // доступ к верхнему элементу стека
+	void Deltop();                        // удалить последний элемент
+
+	bool IsEmpty()const;                  // проверка на пустоту стека
+	bool IsFull()const;                   // проверка на заполненность стека
+	 
+	void Clear();                         // очистить
+	int Length();
 };
 
-template <class T> 
-Stack<T>::Stack(int s)
+template <class T>
+Stack<T>::Stack(int s)                       // конструктор
 {
 	size = s;
-	element = 0;
-	pStack = new T[size];
-}
+	pStack = new T[size]; 
+	element = -1;
+};
 
-template <class T>
-Stack<T>::Stack(const StackT>& st)
+template <class T>                 
+Stack<T>::Stack(const Stack<T>& st)   // конструктор копирования
 {
 	size = st.size;
 	element = st.element;
-	pStack = new T[size];
+	pStack = new ValType[size]; 
 	for (int i = 0; i < element; i++)
 	{
-	  pStack[i] = st.pStack[i];
+		pStack[i] = st.pStack[i];
 	}
-}
+};
 
 template <class T>
-Stack <T> :: ~Stack()
+Stack<T>::~Stack()                      // деструктор
 {
 	delete[] pStack;
-}
+};
 
-template <class T>                // Добавляем элемент в стек
-void Stack<T>::Push(const T& m)
+template <class T>
+bool Stack <T>::IsEmpty() const        // стэк пуст
 {
-	if (element < size)
-	{
-		throw "Stack is full";
-	}
-    pStack[element++] = m;
+	return (element == -1);
+};
 
-}
-
-template <class ValType>
-void Stack<ValType>::Pop()        // Удаляем элемент из стека
+template <class T>
+bool Stack <T>::IsFull() const        // стэк полон
 {
-	if (element > 0)
-	{
-		throw "Stack is empty";
-	}
-	int a = pStack[element];
+	return (element == size - 1);
+};
+
+template <class T>
+void Stack<T>::Push(T el)              // добовление элемента в стек
+{
+	if (IsFull())
+	throw "error: stack is full";
+	element++;
+	pStack[element] = el;               // помещаем элемент в стек
+};
+
+template <class T>
+T Stack<T>::Pop()                 // получение верхнего элемента с удалением из стека
+{
+	if (IsEmpty())
+	throw "error: stack is empty";
+	return pStack[element--];
+};
+
+template <class T>
+T Stack<T>::Top()                      // получение верхнего элемента без удаления 
+{ 
+	if (IsEmpty())
+	throw "error: stack is empty";
+	return pStack[element];
+};
+
+template <class T>
+void Stack<T>::Deltop()                 // удалить последний элемент
+{
+	if (IsEmpty())
+	throw "error: stack is empty";
 	element--;
-}
+};
 
-template <class ValType>
-bool Stack <ValType> ::IsEmpty() const
+template <class T>
+int Stack<T>::Length() //элементов в стэке в момент времени t.
 {
-	return (element == -1)
-}
+	return element + 1;
+};
 
-template <class ValType>
-bool Stack <ValType> ::IsFull() const
+template <class T>
+void Stack<T>::Clear() // очистить
 {
-	return (element >= size);
-}
+	element = -1;
+};
