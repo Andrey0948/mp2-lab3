@@ -75,7 +75,7 @@ void Stack<T>::Push(T el)              // добовление элемента в стек
 };
 
 template <class T>
-T Stack<T>::Pop()                 // получение верхнего элемента с удалением из стека
+T Stack<T>::Pop()                       // получение верхнего элемента с удалением из стека
 {
 	if (IsEmpty())
 	throw "error: stack is empty";
@@ -99,13 +99,13 @@ void Stack<T>::Deltop()                 // удалить последний элемент
 };
 
 template <class T>
-int Stack<T>::Length() //элементов в стэке в момент времени t.
+int Stack<T>::Length()                   //элементов в стэке в момент времени t.
 {
 	return element + 1;
 };
 
 template <class T>
-void Stack<T>::Clear() // очистить
+void Stack<T>::Clear()                   // очистить
 {
 	element = -1;
 };

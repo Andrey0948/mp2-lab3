@@ -61,7 +61,6 @@ bool Postfix::IsNumber(char x)
 
 int Priority(char x)
 {
-	//if (!IsOperation(x)) { throw "error: data is not correct"; }
 
 	if (x == '(') { return 0; }
 	else if (x == ')') { return 1; }
@@ -203,33 +202,6 @@ void Postfix::ChangeInfix(string inf)
 	postfix.clear();
 }
 
-/*void Postfix::ReadArguments() //ввод значений переменных
-{
-	stackArguments.Clear();
-	stackValue.Clear();
-	string ss;
-	for (int i = infix.size() - 1; i >= 0; i--)
-		if (!IsOperation(infix[i]) && !IsNumber(infix[i]) && infix[i] != '.')
-		{
-			ss += infix[i];
-			if (i != 0 && !IsOperation(infix[i - 1]) && !IsNumber(infix[i - 1]))
-				continue;
-			reverse(ss.begin(), ss.end());
-			stackArguments.Push(ss);
-			ss.clear();
-		}
-	int res = stackArguments.Length();
-	value = new double[res];
-	if (res)
-		cout << "¬ведите значени€ переменных." << endl;
-	for (int i = 0; i < res; i++)
-	{
-		cout << stackArguments.Pop() << "=";
-		cin >> value[i];
-	}
-	for (int i = res - 1; i >= 0; i--)
-		stackValue.Push(value[i]);
-}*/
 
 double Postfix::Calculate() // вычисление
 {
