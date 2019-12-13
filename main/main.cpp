@@ -9,7 +9,7 @@ int main()
 	int a = 0;
 	setlocale(LC_CTYPE, "Russian");
 	string expression;
-m:cout << "¬ведите арифметическое выражение(без пробелов)" << endl;
+m:cout << "¬ведите арифметическое выражение" << endl;
 	
 	cin >> expression;
 	Postfix postfix(expression);
